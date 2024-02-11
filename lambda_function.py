@@ -19,13 +19,13 @@ def lambda_handler(event, context):
                 {
                     'Name': 'Master',
                     'InstanceRole': 'MASTER',
-                    'InstanceType': 'm5.xlarge',
+                    'InstanceType': 'm4.large',
                     'InstanceCount': 1
                 },
                 {
                     'Name': 'Core',
                     'InstanceRole': 'CORE',
-                    'InstanceType': 'm5.xlarge',
+                    'InstanceType': 'm4.large',
                     'InstanceCount': 2
                 }
                 # Add other instance groups as needed
@@ -34,8 +34,8 @@ def lambda_handler(event, context):
             'KeepJobFlowAliveWhenNoSteps': True,
             'TerminationProtected': False
         },
-        'JobFlowRole': 'EMR-Role',
-        'ServiceRole': 'EMR-Role'
+        'JobFlowRole': 'DemoRoleForEC2',
+        'ServiceRole': 'DemoRoleForEC2'
         # Add additional configuration parameters as needed
     }
 
