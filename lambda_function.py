@@ -26,7 +26,7 @@ def lambda_handler(event, context):
                     'Name': 'Core',
                     'InstanceRole': 'CORE',
                     'InstanceType': 'm4.large',
-                    'InstanceCount': 2
+                    'InstanceCount': 1
                 }
                 # Add other instance groups as needed
             ],
