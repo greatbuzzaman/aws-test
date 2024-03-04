@@ -64,6 +64,24 @@ pipeline {
                 }
             }
         }
+
+	stage('Create or Update Lambda Function') {
+            steps {
+                script {
+                    // Check if the Lambda function exists
+                    try {
+                        sh "aws lambda get-function --function-name $FUNCTION_NAME"
+                        // Function exists, update its code
+                        sh "aws lambda update-function-code --function-name $FUNCTION_NAME --zip-file fileb://$ZIP_FILE_PATH"
+                        echo "Lambda function '$FUNCTION_NAME' updated successfully."
+                    } catch (Exception e) {
+                        // Function does not exist, create it
+                        sh "aws lambda create-function --function-name $FUNCTION_NAME --runtime $RUNTIME --role $ROLE_ARN --handler $HANDLER --zip-file fileb://$ZIP_FILE_PATH"
+                        echo "Lambda function '$FUNCTION_NAME' created successfully."
+                    }
+                }
+            }
+        }
         
         stage('Verify Deployment') {
             steps {
